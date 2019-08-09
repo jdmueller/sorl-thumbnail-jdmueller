@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 import logging
 
-__author__ = "Mikko Hellsing"
+__author__ = "Jonathan Mueller"
 __license__ = "BSD"
 __version__ = '12.5.0'
-__maintainer__ = "Jazzband"
-__email__ = "mariocesar@humanzilla.com"
+__maintainer__ = "jdmueller"
+__email__ = "jdmueller@protonmail.ch"
 
 
 class NullHandler(logging.Handler):

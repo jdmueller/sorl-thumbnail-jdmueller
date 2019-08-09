@@ -6,7 +6,7 @@ import os
 import re
 
 from django.core.files.base import File, ContentFile
-from django.core.files.storage import Storage  # , default_storage
+from django.core.files.storage import Storage, FileSystemStorage  # , default_storage
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.functional import LazyObject, empty
 from sorl.thumbnail import default
@@ -81,6 +81,8 @@ class ImageFile(BaseImageFile):
     _size = None
 
     def __init__(self, file_, storage=None):
+        self.standard_storage = FileSystemStorage()
+
         if not file_:
             raise ThumbnailError('File is empty.')
 
@@ -158,7 +160,11 @@ class ImageFile(BaseImageFile):
 
     @property
     def url(self):
-        return self.storage.url(self.name)
+        # Modified
+        if settings.THUMBNAIL_FAST_URL:
+            return self.standard_storage.url(self.name)
+        else:
+            return self.storage.url(self.name)
 
     def read(self):
         f = self.storage.open(self.name)
