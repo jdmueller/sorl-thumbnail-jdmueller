@@ -16,7 +16,7 @@ setup(
     name='sorl-thumbnail-jdmueller',
     version=__version__,
     description='Thumbnails for Django',
-    long_description=open('README.rst').read(),
+    #long_description=open('README.rst').read(),
     author=__author__,
     author_email='jdmueller@protonmail.ch',
     maintainer=__maintainer__,
