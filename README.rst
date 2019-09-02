@@ -1,5 +1,14 @@
 |travis| |docs| |pypi| |jazzband-badge| |coveralls|
 
+This package was created as a mod to sorl-thumbnail to fix the issue with slow thumbnails using Amazon S3 and django-storages. With many images on one page the round trip lookup time of the .url method was adding about 1s times the number of images to generate making the page unreasponsive. THUMBNAIL_FORCE_OVERWRITE = True suggested by the sorl-thumbnail docs did not do the trick.
+
+To make this easier for anyone else I created a package for pip with these mods:
+https://pypi.org/project/sorl-thumbnail-jdmueller/
+
+And just add these to settings.py:
+MEDIA_URL = "https://" + os.environ.get("AWS_STORAGE_BUCKET_NAME", "bucket-name") + ".s3.amazonaws.com/"
+THUMBNAIL_FAST_URL = True
+
 Thumbnails for Django.
 
 Features at a glance
